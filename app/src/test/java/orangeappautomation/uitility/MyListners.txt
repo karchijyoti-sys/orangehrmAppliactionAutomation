@@ -1,0 +1,53 @@
+package orangeappautomation.uitility;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.ITest;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
+
+import orangeappautomation.test.BaseTest;
+
+public class MyListners implements ITestListener  {
+    
+ /*      public void onTestSuccess(ITestResult result){
+             WebDriver driver = DriverSingleton.getDriver();
+           if(driver!=null){           ScreenshotUtil.getScreenshotPath(driver, result.getName(),"PassedScreenshots");
+           System.out.println("Test case Passed");
+           }
+           
+        }
+       public void onTestFailure(ITestResult result){
+           WebDriver driver = BaseTest.driver;
+           if(driver!=null){           ScreenshotUtil.getScreenshotPath(driver, result.getName(),"FailureScreenshots");
+           System.out.println("Test case failed");
+           }
+           result.setAttribute("screenshotTaken", true);
+       }  
+       public void onTestStart(ITestResult result){
+           System.out.println("Test case started");
+       }
+         public void onTestSkipped(ITestResult result){
+              System.out.println("Test case skipped");
+         }
+        
+        public void onFinish(ITestContext context){
+            System.out.println("Test suite finished");
+        }
+     
+       
+        public void onStart(ITestContext context) {
+            // TODO Auto-generated method stub
+            System.out.println("Test satarted--------");
+           
+        }
+        
+        public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+            // TODO Auto-generated method stub
+            System.out.println("Unimplemented method 'onTestFailedButWithinSuccessPercentage'");
+        }
+       
+    */
+}

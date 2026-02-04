@@ -17,11 +17,22 @@ repositories {
 
 dependencies {
     // Use TestNG framework, also requires calling test.useTestNG() below
-    testImplementation 'org.testng:testng:6.9.10'
+   testImplementation 'org.testng:testng:7.4.0'
+
 
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
     implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
+    // https://mvnrepository.com/artifact/com.aventstack/extentreports
+    implementation group: 'com.relevantcodes', name: 'extentreports' , version: '2.40.2'
+     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.2'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -39,4 +50,12 @@ application {
 tasks.named('test') {
     // Use TestNG for unit tests.
     useTestNG()
+    {
+       suites 'src/test/resources/testng.xml'
+    }
+    
+}
+
+tasks.named('processTestResources') {
+    exclude '*$dataset.xlsx'
 }

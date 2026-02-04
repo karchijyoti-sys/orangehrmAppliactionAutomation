@@ -41,13 +41,15 @@ public class AdminPage {
     // private List<WebElement> userrolelist;
     By userrolelist = By.xpath("//div[@class='oxd-table-card']//div[@role='row']//div[3]/div");
     By employeelist = By.xpath("//div[@class='oxd-table-card']//div[@role='row']//div[4]/div");
-    By statuslist=By.xpath("//div[@class='oxd-table-card']//div[@role='row']//div[5]/div");
+    By statuslist = By.xpath("//div[@class='oxd-table-card']//div[@role='row']//div[5]/div");
     @FindBy(xpath = "//label[contains(text(),'User Role')]/../following-sibling::div/div")
     private WebElement userroledropdown;
     @FindBy(xpath = "//div[@role='listbox']")
     private WebElement opt;
     @FindBy(xpath = "//label[contains(text(),'Status')]/../following-sibling::div/div")
     private WebElement statusdropdown;
+    @FindBy(xpath = "//button[normalize-space()='Reset']")
+    private WebElement resetbtn;
 
     public void enterusername(String username) {
         settext(driver, usenametextbox, username);
@@ -57,37 +59,18 @@ public class AdminPage {
         clickelement(driver, searchbtn);
     }
 
+    public void selectmenu(String menuitem) {
+        menuitemselection(driver, menuitem);
+    }
+
     public void searchforuser(String user, String role, String employeename, String status) {
-        menuitemselection(driver, "Admin");
-        if (user != null && !user.isEmpty()) {
-            waitforElementToBeVisible(driver, usenametextbox, 20);
-            enterusername(user);
+        wrapper.searchuser(driver, user, usenametextbox, role, userroledropdown, employeename, employeenametextbox,
+                status, statusdropdown, searchbtn);
 
-        }
-        if (role != null && !role.isEmpty()) {
-            waitforElementToBeVisible(driver, userroledropdown, 10);
+    }
 
-            wrapper.clcikondropdown(driver, userroledropdown, role);
-        }
-        if (employeename != null && !employeename.isEmpty()) {
-            waitforElementToBeVisible(driver, employeenametextbox, 20);
-            selevtEmployeeName(driver, employeenametextbox, employeename);
-
-        }
-        if (status != null && !status.isEmpty()) {
-
-            waitforElementToBeVisible(driver, statusdropdown, 10);
-
-            wrapper.clcikondropdown(driver, statusdropdown, status);
-        }
-        waitforElementToBeVisible(driver, searchbtn, 20);
-        clickSearchButton();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void reset() {
+        clickelement(driver, resetbtn);
 
     }
 
@@ -102,6 +85,7 @@ public class AdminPage {
     public boolean vlaidateforindivdualemployee(String searchtext) {
         return wrapper.vlaidateforindivdualfilter(driver, employeelist, searchtext);
     }
+
     public boolean vlaidateforuserSatus(String searchtext) {
         return wrapper.vlaidateforindivdualfilter(driver, statuslist, searchtext);
     }

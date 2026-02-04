@@ -38,6 +38,21 @@ public class wrapper {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static boolean isdisplayed(WebDriver driver,By ele)
+    { boolean status;
+        try{
+             waitforElementToBeVisible(driver,ele,20);
+            WebElement elemnt=driver.findElement(ele);
+            status= elemnt.isDisplayed();
+        }catch(Exception e){
+            status=false;
+        }
+        return status;
+    }
+   public static String getText(WebDriver driver,WebElement ele)
+   {
+    return ele.getText();
+   }
     public static void menuitemselection(WebDriver driver, String menuitem) {
         By menuitems = By.xpath(
                 "//ul[@class='oxd-main-menu']//li//span[contains(@class,'oxd-main-menu-item--name') and normalize-space()='"
@@ -108,7 +123,6 @@ public class wrapper {
         waitforElementToBeVisible(driver, locator, 30);
         actions.sendKeys(Keys.ARROW_DOWN).perform();
         actions.sendKeys(Keys.ENTER).perform();
-       
 
     }
 
@@ -120,4 +134,48 @@ public class wrapper {
         return wrapper.verifyRecordsbasedonsearchtext(driver, visiblelist, searchtext);
 
     }
+
+   public static String logger(String log)
+   {
+        long timeStamp=System.currentTimeMillis();
+        String logmsg=String.format("Info :: %s : %s",timeStamp,log);
+        return logmsg;
+
+   }
+
+    public static void searchuser(WebDriver driver, String username, WebElement usernameele, String role,
+            WebElement userrole, String employeename, WebElement employeenametextbox, String status,
+            WebElement statusdropdown, WebElement searchbtn) {
+
+        if (username != null && !username.isEmpty()) {
+            waitforElementToBeVisible(driver, usernameele, 20);
+            settext(driver, usernameele, username);
+
+        }
+        if (role != null && !role.isEmpty()) {
+            waitforElementToBeVisible(driver, userrole, 10);
+
+            wrapper.clcikondropdown(driver, userrole, role);
+        }
+        if (employeename != null && !employeename.isEmpty()) {
+            waitforElementToBeVisible(driver, employeenametextbox, 20);
+            selevtEmployeeName(driver, employeenametextbox, employeename);
+
+        }
+        if (status != null && !status.isEmpty()) {
+
+            waitforElementToBeVisible(driver, statusdropdown, 10);
+
+            wrapper.clcikondropdown(driver, statusdropdown, status);
+        }
+        waitforElementToBeVisible(driver, searchbtn, 20);
+        clickelement(driver, searchbtn);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
 }
