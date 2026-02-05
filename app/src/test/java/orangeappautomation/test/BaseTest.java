@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -28,7 +29,7 @@ public class BaseTest {
        driver.manage().window().maximize();   
         driver.get(URL); 
         logger("Lauched url"+URL);
-        driver.manage().window().maximize();     
+        driver.manage().window().setSize(new Dimension(1920, 1080));   
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         
     }
